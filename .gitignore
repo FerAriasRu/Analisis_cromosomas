@@ -1,0 +1,16 @@
+# Archivos temporales de R
+.RData
+.Rhistory
+.Rproj.user/
+
+# Archivos temporales
+*.tmp
+*.log
+
+# Carpetas de resultados
+comparacion_genomas/
+resultados_*/
+
+# Archivos del sistema
+.Trash-*
+.DS_Store
