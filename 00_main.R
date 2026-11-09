@@ -48,10 +48,12 @@ modulos_completo <- c(
   "01_parametros.R","01b_genoma_activo.R", "02_datos_base.R", "03_intergenico.R", "04_ventanas.R",
   "05_telomeros.R", "06_subtelomeros.R", "06b_sat350.R", "07_satelites.R", "07b_microsatelites.R",
   "08_intergenico_metricas.R", "09_filtro_banderas.R", "10_repeticiones.R", "11_extremos.R",
-  "12_estadistica.R", "13_zonas_criticas.R", "14_excel.R", "90_guardar_genoma.R", "15_figuras.R")
+  "12_estadistica.R", "13_zonas_criticas.R", "14_excel.R", "90_guardar_genoma.R", "15_figuras.R","17_preparar_proteinas.R,
+  18_graficas_pca_proteinas.R")
 modulos_ligero <- c(
   "01_parametros.R","01b_genoma_activo.R", "02l_base_ligera.R", "06b_sat350.R",
-  "07b_microsatelites.R","15F08_idiograma_ligero.R", "90_guardar_genoma.R")
+  "07b_microsatelites.R","15F08_idiograma_ligero.R", "90_guardar_genoma.R,17_preparar_proteinas.R,
+  18_graficas_pca_proteinas.R")
 
 # -------------------------------------------------------------------------
 

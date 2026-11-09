@@ -24,6 +24,8 @@ genomas <- list(
   RH = list(
     fna = file.path(dir_base, "RH/GCA_033216535.1_TgRH_pasteur.chromosomes.fna"),
     gff = file.path(dir_base, "RH/GCA_033216535.1_TgRH_pasteur.chromosomes.gff3"),
+    protein_fasta = NULL,
+    protein_products =NULL,
     fai = file.path(dir_base, "RH/GCA_033216535.1_TgRH_pasteur.chromosomes.fna.fai"),
     rep = file.path(dir_base, "RH/GCA_033216535.1_TgRH_pasteur.chromosomes.fna.out"),                      # RepeatMasker
     trf = file.path(dir_base, "RH/GCA_033216535.1_TgRH_pasteur.chromosomes.fna.2.7.7.80.10.50.500.dat"),   # TRF
@@ -91,8 +93,15 @@ genomas <- list(
   `ME49-V24` = list(fna = file.path(dir_base, "ME49-V24/ToxoDB-24_TgondiiME49_Genome.fasta")),
   `ME49-V71` = list(fna = file.path(dir_base, "ME49-V71/ToxoDB-71_TgondiiME49_Genome.fasta"))
 )
-genomas_run      <- c("RH")    # genomas a CORRER ahora (vector de nombres de `genomas`; NULL = todos). Con uno solo no se compara
+genomas_run      <- c("RH","RH88")    # genomas a CORRER ahora (vector de nombres de `genomas`; NULL = todos). Con uno solo no se compara
 genomas_comparar <- c("RH", "RH88", "ME49-Intrastrain")    # genomas a COMPARAR: NULL = los de genomas_run; o c("RH","ME49-V71") si ya tienen objetos/*.rds
+
+#-----------------1.1 proteinas --------------
+familias_localizacion <- c(
+  "SAG/SRS (superficie)",
+  "ROP (roptrias)","Familias Tg (A-E)", "MIC (micronemas)",
+  "IMC (complejo membrana)"
+)
 
 # ---- 2. Herramientas externas (si faltan archivos .out/.dat) ----
 carpeta_externos    <- NULL   # la define 01b por genoma (externos_<genoma>/)
