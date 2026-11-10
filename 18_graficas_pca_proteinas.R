@@ -470,6 +470,91 @@ for (gen in genomas_grafica) {
   datos_longitudes[[gen]] <- long
 }
 
+
+# ============================================================
+# Boxplot de GRAVY por familia, separado por genoma
+# ============================================================
+
+for (gen in names(composiciones_aa_lista)) {
+  gravy_gen <- composiciones_aa_lista[[gen]] %>%
+    dplyr::filter(
+      familia %in% familias_localizacion,
+      is.finite(GRAVY)
+    )
+  
+  if (nrow(gravy_gen) == 0) {
+    message("Sin valores GRAVY para las familias seleccionadas en ", gen)
+    next
+  }
+  
+  gravy_gen$familia <- factor(
+    gravy_gen$familia,
+    levels = familias_localizacion
+  )
+  
+  p_gravy <- ggplot2::ggplot(
+    gravy_gen,
+    ggplot2::aes(x = familia, y = GRAVY, fill = familia)
+  ) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      linetype = "dashed",
+      colour = "grey40"
+    ) +
+    ggplot2::geom_boxplot(
+      width = 0.65,
+      outlier.shape = NA,
+      alpha = 0.75
+    ) +
+    ggplot2::geom_jitter(
+      width = 0.15,
+      size = 1,
+      alpha = 0.35
+    ) +
+    ggplot2::labs(
+      title = paste("GRAVY por familia —", gen),
+      subtitle = "Cada punto representa una proteína; línea discontinua = GRAVY 0",
+      x = "Familia proteica",
+      y = "GRAVY (escala Kyte–Doolittle)"
+    ) +
+    ggplot2::theme_bw(base_size = 11) +
+    ggplot2::theme(
+      legend.position = "none",
+      axis.text.x = ggplot2::element_text(
+        angle = 35,
+        hjust = 1
+      ),
+      plot.title = ggplot2::element_text(
+        face = "bold",
+        hjust = 0.5
+      )
+    )
+  
+  ggplot2::ggsave(
+    file.path(
+      carpetas_proteinas_lista[[gen]],
+      paste0("boxplot_GRAVY_por_familia_", gen, ".png")
+    ),
+    p_gravy,
+    width = 10,
+    height = 6,
+    dpi = 300,
+    bg = "white"
+  )
+  
+  ggplot2::ggsave(
+    file.path(
+      carpetas_proteinas_lista[[gen]],
+      paste0("boxplot_GRAVY_por_familia_", gen, ".pdf")
+    ),
+    p_gravy,
+    width = 10,
+    height = 6,
+    bg = "white"
+  )
+}
+
+
 # ============================================================
 # Boxplots de composición: un archivo por genoma, un panel por familia
 # ============================================================

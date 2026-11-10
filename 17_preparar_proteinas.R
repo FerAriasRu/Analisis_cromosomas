@@ -584,6 +584,31 @@ composicion_aa <- df_aa %>%
     across(all_of(aa_cols), ~ .x * 100)
   )
 
+# ---- Calcular GRAVY por proteína ----
+seqs_gravy <- as.character(prot)
+names(seqs_gravy) <- ids_prot_norm
+seqs_gravy <- seqs_gravy[!duplicated(names(seqs_gravy))]
+
+composicion_aa$GRAVY <- vapply(
+  composicion_aa$protein_id,
+  function(id) {
+    secuencia <- seqs_gravy[[id]]
+    
+    if (is.null(secuencia) || is.na(secuencia) || !nzchar(secuencia)) {
+      return(NA_real_)
+    }
+    
+    tryCatch(
+      Peptides::hydrophobicity(
+        secuencia,
+        scale = "KyteDoolittle"
+      ),
+      error = function(e) NA_real_
+    )
+  },
+  numeric(1)
+)
+
 df_full <- df_aa %>%
   inner_join(products, by = "protein_id")
 
